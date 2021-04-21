@@ -1,4 +1,4 @@
-#include "include/lever.h"
+#include "lever.h"
 
 using namespace std;
 

@@ -77,7 +77,7 @@ Pol_squares * squares_init(float side1, float pos1, float side2, float pos2);
 /*
     Function that deallocate instances
 */
-void destroyer(Pol_shaft * newshaft, Pol_squares * newsquares);
+// void destroyer(Pol_shaft * newshaft, Pol_squares * newsquares);
 
 
 
