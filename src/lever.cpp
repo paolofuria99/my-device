@@ -29,6 +29,10 @@ Pol_squares* squares_init(float side1, float pos1, float side2, float pos2){
     return newsquares;
 }
 
+void destroyer(Pol_shaft * myshaft, Pol_squares * mysquares){
+    delete myshaft;
+    delete mysquares;
+}
 // void destroyer(Pol_shaft* newshaft, Pol_squares* newsquares){
 //    delete newshaft->s_length;
 //    delete newshaft;

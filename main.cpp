@@ -22,7 +22,7 @@ int main() {
    
     
 
-    //destroyer(myshaft, mysquares);
+    destroyer(myshaft, mysquares);
     
     return EXIT_SUCCESS;
 }
