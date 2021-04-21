@@ -1,6 +1,9 @@
 #ifndef LEVER_H
 #define LEVER_H
 
+#include <fstream>
+#include <iostream>
+using namespace std;
 
 
 /*
@@ -8,10 +11,10 @@
     @param t_base: Base of the triangle
     @param t_height: height of the triangle
 */
-struct Pol_triangle {
-    double t_base;
-    double t_height;
-};
+// struct Pol_triangle {
+//     float t_base;
+//     float t_height;
+// };
 
 
 
@@ -21,7 +24,7 @@ struct Pol_triangle {
     @param s_length : Length of the length of the shaft
 */
 struct Pol_shaft{
-    double s_length;
+    float s_length;
 };
 
 
@@ -36,10 +39,10 @@ struct Pol_shaft{
     @param sq2_pos: Position of the second square object from the center of the shaft
 */
 struct Pol_squares{
-    double sq1_side;
-    double sq1_pos;
-    double sq2_side;
-    double sq2_pos;
+    float sq1_side;
+    float sq1_pos;
+    float sq2_side;
+    float sq2_pos;
 };
 
 /*
@@ -52,23 +55,29 @@ struct Pol_squares{
     Function that initialize the shaft
     @param sLength
 */
-Pol_shaft * shaft_init(double sLength);
+Pol_shaft * shaft_init(float sLength);
 
 
 
 /*
-    Function that initialize the shaft
-    @param sLength
+    Function that initialize the squares
+    @param side1: Side of the first square 
+    @param pos1: Position of the first square object from the center of the shaft
+    
+    @param side2: Side of the second square 
+    @param pos2: Position of the second square object from the center of the shaft
 */
-Pol_squares * squares_init(double side1, double pos1, double side2, double pos2);
+Pol_squares * squares_init(float side1, float pos1, float side2, float pos2);
+
+
 
 
 
 
 /*
-    Functin that deallocate instances
+    Function that deallocate instances
 */
-void destroyer(Pol_shaft * shaft, Pol_squares * squares);
+void destroyer(Pol_shaft * newshaft, Pol_squares * newsquares);
 
 
 

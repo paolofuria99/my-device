@@ -1,5 +1,5 @@
 #include <iostream>
-#include "lever.h"
+#include "include/lever.h"
 
 using namespace std;
 
@@ -17,10 +17,12 @@ int main() {
     cout << "- position: 15"<< endl;
 
 
-    shaft_init(30);
-    squares_init(15, 15, 15, 15);
-
-
+    Pol_shaft* myshaft= shaft_init(30);
+    Pol_squares* mysquares= squares_init(15 , 15 , 15 , 15);
+   
     
-    return 0;
+
+    //destroyer(myshaft, mysquares);
+    
+    return EXIT_SUCCESS;
 }
