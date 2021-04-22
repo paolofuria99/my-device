@@ -75,6 +75,15 @@ Pol_squares * squares_init(float side1, float pos1, float side2, float pos2);
 string to_svg(Pol_shaft* myshaft, Pol_squares * mysquares);
 
 
+/** Function to change sizes and checks constrains
+ *  @param ShaftLength Length of the shaft
+ *  @param SquareSide1 Side of the square 1
+ *  @param SquarePos1 Position of the square 1
+ *  @param SquareSide2 Side of the square 2
+ *  @param SquarePos2 Position of the square 2
+ * 
+*/
+int my_set(double ShaftLength, double SquareSide1, double SquarePos1, double SquareSide2, double SquarePos2);
 
 
 /*

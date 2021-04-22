@@ -2,6 +2,28 @@
 
 using namespace std;
 
+
+int my_set(double ShaftLength, double SquareSide1, double SquarePos1, double SquareSide2, double SquarePos2){
+    
+    if (ShaftLength==0 || SquareSide1==0 || SquareSide2==0 || SquarePos1==0 || SquarePos2==0){
+        cout<<"Dimensions have to be different than 0!!!"<<endl;
+        return 1;
+    }
+    
+    if(ShaftLength>500 || SquareSide1>300 || SquareSide2>300 || SquarePos1>300 || SquarePos2>300){
+        cout<<"Dimensions have to be SMALLER than 500 for the SHAFT and SMALLER than 300 for the SQUARES!!!"<<endl;
+        return 1;
+    }
+
+    if(SquarePos1>(ShaftLength/2) || SquarePos2>(ShaftLength/2)){
+        cout<<"Position of the squares have to be SMALLER than HALF of the SHAFT's LENGTH"<<endl;
+        return 1;
+    }
+
+    return 0;
+}
+
+
 Pol_shaft* shaft_init(float sLength){
 
     //I suppose that the shaft with length 0 can't exist; and have to be smaller than 500, in order to fit the image's width
@@ -9,7 +31,7 @@ Pol_shaft* shaft_init(float sLength){
         return NULL;
     }
 
-    // Allocating a struct called "shaft" like "Pol_shaft"
+    // Allocating a struct called "newshaft" like "Pol_shaft"
     Pol_shaft* newshaft = new Pol_shaft;
 
     // Size assignment
@@ -26,7 +48,7 @@ Pol_squares* squares_init(float side1, float pos1, float side2, float pos2){
         return NULL;
     }
 
-    // Allocating a struct called "squares" like "Pol_squares"
+    // Allocating a struct called "newsquares" like "Pol_squares"
     Pol_squares* newsquares = new Pol_squares;
 
     // Size assignment
