@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+
+<svg xmlns="http://www.w3.org/2000/svg" height="300" width="500">
+  <polygon points="200,250 300,250 250,200" style="fill:lime;stroke:purple;stroke-width:1" />
+  
+  <line x1="150" y1="200" x2="350" y2="200" style="stroke:rgb(255,0,0);stroke-width:2" />
+  
+   <rect x="150" y="150" width="50" height="50" style="fill:blue;stroke:black;stroke-width:1" />
+   
+   <rect x="300" y="150" width="50" height="50" style="fill:blue;stroke:black;stroke-width:1" />
+   
+ 
+  
+  Sorry, your browser does not support inline SVG.
+</svg>
+
