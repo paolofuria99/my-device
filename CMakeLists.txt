@@ -12,3 +12,7 @@ target_include_directories(main PRIVATE include)
 target_sources(main PRIVATE src/lever.cpp)
 
 target_link_libraries(main)
+
+# TESTS SECTION
+# Basically makes CMake read the CMakeLists.txt file contained in tests
+add_subdirectory(tests)

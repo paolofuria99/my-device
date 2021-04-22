@@ -9,8 +9,7 @@
 using namespace std;
 
 int main() {
-    string svg2;
-
+    
     cout << "Inizialize a lever with" << endl;
     cout << "A Shaft with the following size:" << endl;
     cout << "- Length: 30"<< endl;
@@ -26,25 +25,23 @@ int main() {
     Pol_shaft* myshaft= shaft_init(200);
     Pol_squares* mysquares= squares_init(20 , 80 , 50 , 50);
 
+
     //Create a string in order to create a svg file, and this string is shown
+    string svg2;
     svg2 = to_svg(myshaft, mysquares);
     cout << "Il codice svg creato è:" << endl;
     cout << svg2;
 
 
-    // Create and open a text file
+    // Create and open a text file, writing to the file the string of the svg, closing the file
     ofstream MyFile("filename.svg");
-
-    // Write to the file
     MyFile << svg2;
-
-    // Close the file
     MyFile.close();
 
 
 
     
-
+    //Destroy the objects
     destroyer(myshaft, mysquares);
     
     return EXIT_SUCCESS;
