@@ -36,7 +36,7 @@ int main() {
                 SquareSide2 = 50;
                 SquarePos2 = 50;
 
-                fine=0;
+                fine=my_set(ShaftLength, SquareSide1, SquarePos1, SquareSide2, SquarePos2);
                 break;
             case 2:
                 cout << "Inizialize a lever" << endl;
@@ -61,6 +61,7 @@ int main() {
       
     }while(fine==1);
 
+    //The dimensions checked are now associated to the objects, creating objects
     myshaft= shaft_init(ShaftLength);
     mysquares= squares_init(SquareSide1 , SquarePos1 , SquareSide2 , SquarePos2);
 
@@ -77,9 +78,6 @@ int main() {
     ofstream MyFile("filename.svg");
     MyFile << svg2;
     MyFile.close();
-
-
-
     
     //Destroy the objects
     destroyer(myshaft, mysquares);

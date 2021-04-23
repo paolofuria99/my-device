@@ -26,11 +26,6 @@ int my_set(double ShaftLength, double SquareSide1, double SquarePos1, double Squ
 
 Pol_shaft* shaft_init(float sLength){
 
-    //I suppose that the shaft with length 0 can't exist; and have to be smaller than 500, in order to fit the image's width
-    if(sLength==0||sLength>500){
-        return NULL;
-    }
-
     // Allocating a struct called "newshaft" like "Pol_shaft"
     Pol_shaft* newshaft = new Pol_shaft;
 
@@ -42,11 +37,6 @@ Pol_shaft* shaft_init(float sLength){
 }
 
 Pol_squares* squares_init(float side1, float pos1, float side2, float pos2){
-
-    //I suppose that the squares' side and position 0 or bigger than 300 can't exist in order to fit the image's width
-    if(side1==0 || side2==0 ||pos1==0 || pos2==0|| side1>300 || side2>300){
-        return NULL;
-    }
 
     // Allocating a struct called "newsquares" like "Pol_squares"
     Pol_squares* newsquares = new Pol_squares;
