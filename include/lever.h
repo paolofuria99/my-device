@@ -1,9 +1,11 @@
 #ifndef LEVER_H
 #define LEVER_H
 
-#include <fstream>
-#include <string>
 #include <iostream>
+#include <fstream>
+#include <streambuf>
+#include <string>
+#include <sstream>
 using namespace std;
 
 
@@ -11,15 +13,12 @@ using namespace std;
     For now the triangle lenghts are alredy give, and cannot be modified
 */
 
+
 /**
  * Initialize the isosceles triangle that lifts the shaft
  * @param t_base: Base of the triangle
  * @param t_height: height of the triangle
 */
-// struct Pol_triangle {
-//     float t_base;
-//     float t_height;
-// };
 
 
 /**
@@ -29,7 +28,6 @@ using namespace std;
 struct Pol_shaft{
     float s_length;
 };
-
 
 
 
@@ -67,7 +65,7 @@ Pol_squares * squares_init(float side1, float pos1, float side2, float pos2);
 
 
 
-/** function that create a string svg containing the image of the shaft and of the squares 
+/** Function that create a string svg containing the image of the shaft and of the squares 
  * 
  *  @param myshaft stucture containg the data of the shaft
  *  @param mysquares stucture containg the data of the squares
@@ -86,8 +84,23 @@ string to_svg(Pol_shaft* myshaft, Pol_squares * mysquares);
 int my_set(double ShaftLength, double SquareSide1, double SquarePos1, double SquareSide2, double SquarePos2);
 
 
-/*
-    Function that deallocate instances
+/** Function that print the string "svg" into a file
+ *  Receive in input the name of the file's name that I want to create and open and then I print into it the string received
+ *  @param filename name of the file 
+ *  @param str_svg string containing everything needed to create an svg file
+ */
+void svg_to_file(string filename, string str_svg);
+
+
+/** Function that read an svg file
+ * @param filename name of the file to read
+ * @return a string of the file read
+*/
+string read_svg (string filename);
+
+
+/**
+ * Function that deallocate instances
 */
 void destroyer(Pol_shaft * myshaft, Pol_squares * mysquares);
 

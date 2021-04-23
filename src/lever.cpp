@@ -36,6 +36,7 @@ Pol_shaft* shaft_init(float sLength){
     return newshaft;
 }
 
+
 Pol_squares* squares_init(float side1, float pos1, float side2, float pos2){
 
     // Allocating a struct called "newsquares" like "Pol_squares"
@@ -74,20 +75,37 @@ string to_svg(Pol_shaft* myshaft, Pol_squares * mysquares){
 }
 
 
+void svg_to_file(string filename, string str_svg){
 
+    // Create and open a text file, writing to the file the string of the svg, closing the file
+    ofstream MyFile(filename);
+    MyFile << str_svg;
+    MyFile.close();
+}
+
+
+string read_svg (string filename){
+    
+    // Read from the text file
+    ifstream MyReadFile(filename);
+    stringstream buffer;
+    //Create a text string, which is used to output the text file
+    string myText;
+
+    if (MyReadFile.is_open()){
+        buffer << MyReadFile.rdbuf();
+        // Create a text string, which is used to output the text file
+        myText = buffer.str();
+    }else{
+        cout << "Unable to open file, maybe the file's name is wrong!"<<endl;
+        return "no";
+    }
+
+    return myText; 
+}
 
 
 void destroyer(Pol_shaft * myshaft, Pol_squares * mysquares){
     delete myshaft;
     delete mysquares;
 }
-// void destroyer(Pol_shaft* newshaft, Pol_squares* newsquares){
-//    delete newshaft->s_length;
-//    delete newshaft;
-
-//    delete newsquares->sq1_side;
-//    delete newsquares->sq1_pos;
-//    delete newsquares->sq2_side;
-//    delete newsquares-> sq2_pos;
-//    delete newsquares;
-// }
