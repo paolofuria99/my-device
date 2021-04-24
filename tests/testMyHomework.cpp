@@ -1,10 +1,6 @@
 
 #include "../include/catch2/catch2.hpp"
 #include "../include/lever.h"
-/**
- * Pol_shaft* myshaft= shaft_init(200);
- * Pol_squares* mysquares= squares_init(20 , 80 , 50 , 50);
-*/
 
 TEST_CASE("Shaft have to be bigger than 0", "[my_set constrains]") {
     REQUIRE( my_set(0,0,0,0,0) == 1);

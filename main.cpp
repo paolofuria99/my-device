@@ -14,11 +14,12 @@ int main() {
     Pol_shaft* myshaft;
     Pol_squares* mysquares;
 
-    float ShaftLength ;
-    float SquareSide1 ;
-    float SquarePos1 ;
-    float SquareSide2 ;
-    float SquarePos2 ;
+    //Default parameters
+    float ShaftLength=200 ;
+    float SquareSide1=20 ;
+    float SquarePos1=80 ;
+    float SquareSide2=50 ;
+    float SquarePos2=50;
 
     //Name of the svg file that you want to create, is the same file that is read
     string svgfilename= "filename.svg";
@@ -30,24 +31,35 @@ int main() {
     string svg_created;
 
     int c;
-    int fine=1;
+    int fine=2;
     do {
         cout<<"\n Choose a command. Do you want change the default sizes? Type a number :"<<endl;
         cout<< "1 - No" <<endl;
         cout<< "2 - Yes" <<endl;
-        cout<< "3 - Read sizes from an already existing file" << endl;
+        cout<< "3 - Read sizes from an already existing file. ATTENTION! After that Sizes will be set to default!!" << endl;
+        cout<< "9 - to quit/end the program"<<endl;
         cout<< "Insert the option here: ";
-        cin>> c;
+        
+        /**I found online this formula that checks if the input is correct.. 
+         * example, it will fail if the input is a letter or not an integer (float, double..)
+        */
+        while(!(cin>> c)){
+            cout<<"\n ERROR: an integer must be entered:";
+            cin.clear();
+            cin.ignore(132, '\n');
+        }
         cout<<endl;
+        cout<<"DEBUG:"<<c<<endl;
+        
         switch (c) 
         {
             case 1:
-                ShaftLength = 200;
-                SquareSide1 = 20;
-                SquarePos1 = 80;
-                SquareSide2 = 50;
-                SquarePos2 = 50;
-
+                //Parameters are sets to default
+                ShaftLength=200 ;
+                SquareSide1=20 ;
+                SquarePos1=80 ;
+                SquareSide2=50 ;
+                SquarePos2=50;
                 fine=my_set(ShaftLength, SquareSide1, SquarePos1, SquareSide2, SquarePos2);
                 break;
             case 2:
@@ -55,15 +67,15 @@ int main() {
                 cout << "A Shaft with the following size: (HAVE TO BE BIGGER THAN 0 AND SMALLER THAN 500!!)" << endl;
                 cout << "- Length: "<< endl;
                 cin >> ShaftLength;
-                cout << "The FIRST square SIDE: (HAVE TO BE BIGGER THAN 0 AND SMALLER THAN 300!!)" << endl;
+                cout << "The FIRST square SIDE: (HAVE TO BE BIGGER THAN 0 AND SMALLER THAN THE HALF LENGTH OF THE SHAFT!!)" << endl;
                 cin >> SquareSide1;
                 cout << "The FIRST square POSITION: (HAVE TO BE BIGGER THAN 0 AND SMALLER THAN THE HALF LENGTH OF THE SHAFT!!)" << endl;
                 cin >> SquarePos1;
-                cout << "The SECOND square SIDE: (HAVE TO BE BIGGER THAN 0 AND SMALLER THAN 300!!)" << endl;
+                cout << "The SECOND square SIDE: (HAVE TO BE BIGGER THAN 0 AND SMALLER THAN THE HALF LENGTH OF THE SHAFT!!)" << endl;
                 cin >> SquareSide2;
                 cout << "The SECOND square POSITION: (HAVE TO BE BIGGER THAN 0 AND SMALLER THAN THE HALF LENGTH OF THE SHAFT!!)" << endl;
                 cin >> SquarePos2;
-                
+                 
                 fine=my_set(ShaftLength, SquareSide1, SquarePos1, SquareSide2, SquarePos2);
                 break;
             case 3:
@@ -76,12 +88,17 @@ int main() {
                     cout<<"The svg file readed is:"<<endl;
                     cout<<svg_readed<<endl;
                     svg_created=svg_readed;
-                    fine=0;
+                    cout<<"Sizes are now sets to default!!"<<endl;
+                    fine=my_set(ShaftLength, SquareSide1, SquarePos1, SquareSide2, SquarePos2);
                     break;
                 }
+            case 9:
+                fine=0;
+                return EXIT_SUCCESS;
             default:
-                cout<<"Please, enter a correct option!\n";
-            break;
+                cout<<"\n Please, enter a correct option!\n";
+                fine=1;
+                break;
         }
       
     }while(fine==1);
@@ -92,9 +109,8 @@ int main() {
     mysquares= squares_init(SquareSide1 , SquarePos1 , SquareSide2 , SquarePos2);
 
 
-
     svg_created = to_svg(myshaft, mysquares);
-    cout << "The new svg code created is:" << endl;
+    cout << "\n The new svg code created is:" << endl;
     cout << svg_created;
 
 

@@ -99,6 +99,14 @@ void svg_to_file(string filename, string str_svg);
 string read_svg (string filename);
 
 
+/** Used to che check the user's choice, check if is a number or string
+ * @param str_ch choice of the user
+ * @return false if is a string
+ * @return true if is an integer
+*/
+//check if number or string
+// bool check_number(string str_ch);
+
 /**
  * Function that deallocate instances
 */
