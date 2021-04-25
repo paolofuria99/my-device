@@ -14,6 +14,11 @@ int main() {
     Pol_shaft* myshaft;
     Pol_squares* mysquares;
 
+    //Objects that have to be checked. Object not checked
+    Pol_shaft* tryshaft;
+    Pol_squares* trysquares;
+
+
     //Default parameters
     float ShaftLength=200 ;
     float SquareSide1=20 ;
@@ -36,7 +41,7 @@ int main() {
         cout<<"\n Choose a command. Do you want change the default sizes? Type a number :"<<endl;
         cout<< "1 - No" <<endl;
         cout<< "2 - Yes" <<endl;
-        cout<< "3 - Read sizes from an already existing file. ATTENTION! After that Sizes will be set to default!!" << endl;
+        cout<< "3 - Read sizes from an already existing file and storing them" << endl;
         cout<< "9 - to quit/end the program"<<endl;
         cout<< "Insert the option here: ";
         
@@ -49,7 +54,7 @@ int main() {
             cin.ignore(132, '\n');
         }
         cout<<endl;
-        cout<<"DEBUG:"<<c<<endl;
+        cout<<"DEBUG:" << c << "\n" << endl;
         
         switch (c) 
         {
@@ -60,8 +65,17 @@ int main() {
                 SquarePos1=80 ;
                 SquareSide2=50 ;
                 SquarePos2=50;
+
+                //Checking dimensions
                 fine=my_set(ShaftLength, SquareSide1, SquarePos1, SquareSide2, SquarePos2);
+                    
+                if (fine=0){
+                    //The dimensions checked are now associated to the objects, creating objects
+                    myshaft= shaft_init(ShaftLength);
+                    mysquares= squares_init(SquareSide1 , SquarePos1 , SquareSide2 , SquarePos2);
+                }
                 break;
+
             case 2:
                 cout << "Inizialize a lever" << endl;
                 cout << "A Shaft with the following size: (HAVE TO BE BIGGER THAN 0 AND SMALLER THAN 500!!)" << endl;
@@ -75,9 +89,16 @@ int main() {
                 cin >> SquareSide2;
                 cout << "The SECOND square POSITION: (HAVE TO BE BIGGER THAN 0 AND SMALLER THAN THE HALF LENGTH OF THE SHAFT!!)" << endl;
                 cin >> SquarePos2;
-                 
+                
+                //Dimensions are checked
                 fine=my_set(ShaftLength, SquareSide1, SquarePos1, SquareSide2, SquarePos2);
+                if (fine=0){
+                    //The dimensions checked are now associated to the objects, creating objects
+                    myshaft= shaft_init(ShaftLength);
+                    mysquares= squares_init(SquareSide1 , SquarePos1 , SquareSide2 , SquarePos2);
+                }
                 break;
+
             case 3:
                 svg_readed=read_svg (svgfilename);
                 if (svg_readed=="no"){
@@ -87,9 +108,20 @@ int main() {
                 }else{
                     cout<<"The svg file readed is:"<<endl;
                     cout<<svg_readed<<endl;
-                    svg_created=svg_readed;
-                    cout<<"Sizes are now sets to default!!"<<endl;
-                    fine=my_set(ShaftLength, SquareSide1, SquarePos1, SquareSide2, SquarePos2);
+                    
+                    //New objects, NOT checked, that are created from the file readed
+                    tryshaft= shaft_from_svg(svg_readed);
+                    trysquares= squares_from_svg(svg_readed);
+
+                    //Check of variables readed
+                    fine=my_set(tryshaft->s_length, trysquares->sq1_side, trysquares->sq1_pos, trysquares->sq2_side, trysquares->sq2_pos);
+                    if(fine=0){            
+                        //New objects, checked, that are created from the file readed
+                        myshaft=tryshaft;
+                        mysquares=trysquares;
+                        svg_created=svg_readed;
+                    }
+                    
                     break;
                 }
             case 9:
@@ -115,11 +147,12 @@ int main() {
 
 
     //Prints the svg string to a file called as specified in the variable svgfilename
-    cout<<"The new svg string with the parameters selected is created and is now saved into a file"<<endl;
+    cout<<"\nThe new svg string with the parameters selected is created and is now saved into a file\n"<<endl;
     svg_to_file(svgfilename,svg_created);
     
     
     //Destroy the objects
+    destroyer(tryshaft, trysquares);
     destroyer(myshaft, mysquares);
     
     return EXIT_SUCCESS;

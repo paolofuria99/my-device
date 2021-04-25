@@ -15,13 +15,6 @@ using namespace std;
 
 
 /**
- * Initialize the isosceles triangle that lifts the shaft
- * @param t_base: Base of the triangle
- * @param t_height: height of the triangle
-*/
-
-
-/**
  *  Initialize the shaft
  *  @param s_length : Length of the length of the shaft
 */
@@ -79,6 +72,8 @@ string to_svg(Pol_shaft* myshaft, Pol_squares * mysquares);
  *  @param SquarePos1 Position of the square 1
  *  @param SquareSide2 Side of the square 2
  *  @param SquarePos2 Position of the square 2
+ *  @return @c 1 if every size is ok
+ *  @return @c 0 if a size is NOT ok
  * 
 */
 int my_set(double ShaftLength, double SquareSide1, double SquarePos1, double SquareSide2, double SquarePos2);
@@ -98,14 +93,33 @@ void svg_to_file(string filename, string str_svg);
 */
 string read_svg (string filename);
 
-
-/** Used to che check the user's choice, check if is a number or string
- * @param str_ch choice of the user
- * @return false if is a string
- * @return true if is an integer
+/** Function that find element in a string like the svg file 
+ * @param str Strig passed, string where the function search elements
+ * @param start String from which the function start to store the element
+ * @param end  String used by the function to end to store the element
+ * @param typeofelement String used to optimize the search, is a svg comment, in case there are multiple similar objects
+ * @return @c elementFound a double variable, the element found
 */
-//check if number or string
-// bool check_number(string str_ch);
+float Finder(string str, string start, string end, string typeofelement);
+
+
+/**
+ * Function that search variables from an svg file and store them
+ * This function uses Finder() function
+ * @param str String passed, the svg file
+ * @return @c readedshaft a struct of a new shaft where the parameters are the one readed from str
+*/
+Pol_shaft * shaft_from_svg(string str);
+
+
+/**
+ * Function that search variables from an svg file and store them
+ * This function uses Finder() function
+ * @param str String passed, the svg file
+ * @return @c readedshaft a struct of new squares where the parameters are the one readed from str
+*/
+Pol_squares * squares_from_svg(string str);
+
 
 /**
  * Function that deallocate instances

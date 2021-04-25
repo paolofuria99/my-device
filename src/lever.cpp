@@ -71,8 +71,11 @@ string to_svg(Pol_shaft* myshaft, Pol_squares * mysquares){
     svg= "<?xml version='1.0' encoding='UTF-8' standalone='no'?> \n";
     svg+= "<svg xmlns='http://www.w3.org/2000/svg' height='300' width='500'> \n" ;
     svg+= "<polygon points='200,300 250,250 300,300' style='fill:lime;stroke:purple;stroke-width:1' />\n";  
+    svg+= "<!-- Shaft -->\n";
     svg+= "<line x1='"+ to_string(xline1) + "'" + " y1='250' x2='" + to_string(xline2)+ "' y2='250' style='stroke:rgb(255,0,0);stroke-width:2' />\n";
+    svg+= "<!-- Square1 -->\n";
     svg+= "<rect x='"+ to_string(position1x) +"' y='"+ to_string(position1y) +"' width='"+ to_string(mysquares->sq1_side) +"' height='"+ to_string(mysquares->sq1_side) +"' style='fill:blue;stroke:black;stroke-width:1' />\n";
+    svg+= "<!-- Square2 -->\n";
     svg+= "<rect x='"+ to_string(position2x) +"' y='"+ to_string(position2y) +"' width='"+ to_string(mysquares->sq2_side) +"' height='"+ to_string(mysquares->sq2_side) +"' style='fill:blue;stroke:black;stroke-width:1' />\n";
     svg+= "</svg> \n";
     
@@ -105,20 +108,67 @@ string read_svg (string filename){
         cout << "Unable to open file, maybe the file's name is wrong!"<<endl;
         return "no";
     }
+    MyReadFile.close();
 
     return myText; 
 }
 
 
-// //check if number or string
-// bool check_number(string str_ch) {
-//     for (int i = 0; i < str_ch.length(); i++)
-//     if (isdigit(str_ch[i]) == false){
-//        return false;
-//     }else{
-//         return true;
-//     }
-// }
+float Finder(string str, string start, string end, string typeofelement){
+  
+  size_t found_typeofelement = str.find(typeofelement);
+  float elementFound;
+
+  if (found_typeofelement!=string::npos){
+    size_t found = str.find(start,found_typeofelement);
+    if (found!=string::npos){        
+      size_t find1 = found + start.size();
+      size_t find2= str.find(end, find1);
+      string element = str.substr(find1, find2-find1);
+      cout<< "DEBUG: Parameter readed is: "<< element<<endl;
+      elementFound=stof(element); //Convert a string into a float
+    }else{
+        cout<<"not found!"<<endl;
+    }
+  }else{
+    cout<<"Comment of the device name not found!"<<endl;
+  }
+ 
+
+  return elementFound;
+}
+
+
+Pol_shaft * shaft_from_svg(string str){
+    // Allocating a struct called "newshaft" like "Pol_shaft"
+    Pol_shaft* newshaftreaded = new Pol_shaft;
+    newshaftreaded->s_length= Finder(str, "x2='", "'", "Shaft") - Finder(str, "x1='", "'", "Shaft");
+    cout<< "DEBUG: Shaft length calculated from the file read is: "<<newshaftreaded->s_length<<"\n"<<endl;
+
+    return newshaftreaded;
+}
+
+
+Pol_squares * squares_from_svg(string str){
+    // Allocating a struct called "newsquares" like "Pol_shaft"
+    Pol_squares* newsquaresreaded = new Pol_squares;
+
+    newsquaresreaded->sq1_pos = (250-Finder(str, "x='",  "'", "Square1"))/(1.5);
+    cout<<"DEBUG: sq1 pos calculated from the file read: "<<newsquaresreaded->sq1_pos <<"\n"<<endl;
+
+    newsquaresreaded->sq1_side = Finder(str, "width='",  "'", "Square1");
+    cout<<"DEBUG: sq1 side calculated from the file read: "<<newsquaresreaded->sq1_side <<"\n"<<endl;
+    
+    newsquaresreaded->sq2_pos = (Finder(str, "x='",  "'", "Square2")-250)*2;
+    cout<<"DEBUG: sq2 pos calculated from the file read: "<<newsquaresreaded->sq2_pos <<"\n"<<endl;
+
+    newsquaresreaded->sq2_side = Finder(str, "width='",  "'", "Square2");
+    cout<<"DEBUG: sq2 side calculated from the file read: "<<newsquaresreaded->sq2_side <<endl;
+    
+
+    return newsquaresreaded;
+
+}
 
 
 void destroyer(Pol_shaft * myshaft, Pol_squares * mysquares){
