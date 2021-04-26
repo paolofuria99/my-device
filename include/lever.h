@@ -16,7 +16,7 @@ using namespace std;
 
 /**
  *  Initialize the shaft
- *  @param s_length : Length of the length of the shaft
+ *  @param s_length : Length of the shaft
 */
 struct Pol_shaft{
     float s_length;
