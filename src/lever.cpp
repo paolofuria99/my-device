@@ -172,8 +172,11 @@ Pol_squares * squares_from_svg(string str){
 
 
 void destroyer(Pol_shaft * myshaft, Pol_squares * mysquares){
-    if (myshaft != NULL && mysquares!=NULL){
+    if (myshaft != NULL){
         delete myshaft;
+    }
+
+    if (mysquares != NULL){
         delete mysquares;
     }
 

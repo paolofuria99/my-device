@@ -11,12 +11,15 @@
 using namespace std;
 
 int main() {
-    Pol_shaft* myshaft;
-    Pol_squares* mysquares;
+    
+    //Objects that are checked. 
+    Pol_shaft* myshaft = new Pol_shaft;
+    Pol_squares* mysquares= new Pol_squares;
+
 
     //Objects that have to be checked. Object not checked
-    Pol_shaft* tryshaft;
-    Pol_squares* trysquares;
+    Pol_shaft* tryshaft= new Pol_shaft;
+    Pol_squares* trysquares= new Pol_squares;
 
 
     //Default parameters
@@ -69,7 +72,8 @@ int main() {
                 //Checking dimensions
                 fine=my_set(ShaftLength, SquareSide1, SquarePos1, SquareSide2, SquarePos2);
                     
-                if (fine=0){
+                if (fine==0){
+                    cout<<"\n DEBUG: Dimensions checked.. Creating objects.."<<endl;
                     //The dimensions checked are now associated to the objects, creating objects
                     myshaft= shaft_init(ShaftLength);
                     mysquares= squares_init(SquareSide1 , SquarePos1 , SquareSide2 , SquarePos2);
@@ -92,7 +96,8 @@ int main() {
                 
                 //Dimensions are checked
                 fine=my_set(ShaftLength, SquareSide1, SquarePos1, SquareSide2, SquarePos2);
-                if (fine=0){
+                if (fine==0){
+                    cout<<"\n DEBUG: Dimensions checked.. Creating objects.."<<endl;
                     //The dimensions checked are now associated to the objects, creating objects
                     myshaft= shaft_init(ShaftLength);
                     mysquares= squares_init(SquareSide1 , SquarePos1 , SquareSide2 , SquarePos2);
@@ -115,11 +120,11 @@ int main() {
 
                     //Check of variables readed
                     fine=my_set(tryshaft->s_length, trysquares->sq1_side, trysquares->sq1_pos, trysquares->sq2_side, trysquares->sq2_pos);
-                    if(fine=0){            
+                    if(fine==0){ 
+                        cout<<"\n DEBUG: Dimensions checked.. Creating objects.."<<endl;           
                         //New objects, checked, that are created from the file readed
                         myshaft=tryshaft;
                         mysquares=trysquares;
-                        svg_created=svg_readed;
                     }
                     
                     break;
@@ -135,12 +140,7 @@ int main() {
       
     }while(fine==1);
 
-
-    //The dimensions checked are now associated to the objects, creating objects
-    myshaft= shaft_init(ShaftLength);
-    mysquares= squares_init(SquareSide1 , SquarePos1 , SquareSide2 , SquarePos2);
-
-
+    //Is now created a string for a svg file with the dimesions that are given
     svg_created = to_svg(myshaft, mysquares);
     cout << "\n The new svg code created is:" << endl;
     cout << svg_created;
@@ -152,7 +152,6 @@ int main() {
     
     
     //Destroy the objects
-    destroyer(tryshaft, trysquares);
     destroyer(myshaft, mysquares);
     
     return EXIT_SUCCESS;
