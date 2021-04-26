@@ -139,7 +139,7 @@ float Finder(string str, string start, string end, string typeofelement);
  * Function that search variables from an svg file and store them
  * This function uses Finder() function
  * @param str String passed, the svg file
- * @return @c readedshaft a struct of a new shaft where the parameters are the one readed from str
+ * @return @c newshaftreaded a struct of a new shaft where the parameters are the one readed from str
 */
 Pol_shaft * shaft_from_svg(string str);
 ~~~
@@ -150,7 +150,7 @@ Pol_shaft * shaft_from_svg(string str);
  * Function that search variables from an svg file and store them
  * This function uses Finder() function
  * @param str String passed, the svg file
- * @return @c readedshaft a struct of new squares where the parameters are the one readed from str
+ * @return @c newsquaresreaded a struct of new squares where the parameters are the one readed from str
 */
 Pol_squares * squares_from_svg(string str);
 ~~~
