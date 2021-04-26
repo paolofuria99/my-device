@@ -1,25 +1,17 @@
 #ifndef LEVER_H
 #define LEVER_H
 
-#include <fstream>
-#include <string>
 #include <iostream>
+#include <fstream>
+#include <streambuf>
+#include <string>
+#include <sstream>
 using namespace std;
 
 
 /*
     For now the triangle lenghts are alredy give, and cannot be modified
 */
-
-/**
- * Initialize the isosceles triangle that lifts the shaft
- * @param t_base: Base of the triangle
- * @param t_height: height of the triangle
-*/
-// struct Pol_triangle {
-//     float t_base;
-//     float t_height;
-// };
 
 
 /**
@@ -29,7 +21,6 @@ using namespace std;
 struct Pol_shaft{
     float s_length;
 };
-
 
 
 
@@ -67,7 +58,7 @@ Pol_squares * squares_init(float side1, float pos1, float side2, float pos2);
 
 
 
-/** function that create a string svg containing the image of the shaft and of the squares 
+/** Function that create a string svg containing the image of the shaft and of the squares 
  * 
  *  @param myshaft stucture containg the data of the shaft
  *  @param mysquares stucture containg the data of the squares
@@ -75,10 +66,63 @@ Pol_squares * squares_init(float side1, float pos1, float side2, float pos2);
 string to_svg(Pol_shaft* myshaft, Pol_squares * mysquares);
 
 
+/** Function to change sizes and checks constrains
+ *  @param ShaftLength Length of the shaft
+ *  @param SquareSide1 Side of the square 1
+ *  @param SquarePos1 Position of the square 1
+ *  @param SquareSide2 Side of the square 2
+ *  @param SquarePos2 Position of the square 2
+ *  @return @c 1 if every size is ok
+ *  @return @c 0 if a size is NOT ok
+ * 
+*/
+int my_set(double ShaftLength, double SquareSide1, double SquarePos1, double SquareSide2, double SquarePos2);
 
 
-/*
-    Function that deallocate instances
+/** Function that print the string "svg" into a file
+ *  Receive in input the name of the file's name that I want to create and open and then I print into it the string received
+ *  @param filename name of the file 
+ *  @param str_svg string containing everything needed to create an svg file
+ */
+void svg_to_file(string filename, string str_svg);
+
+
+/** Function that read an svg file
+ * @param filename name of the file to read
+ * @return a string of the file read
+*/
+string read_svg (string filename);
+
+/** Function that find element in a string like the svg file 
+ * @param str Strig passed, string where the function search elements
+ * @param start String from which the function start to store the element
+ * @param end  String used by the function to end to store the element
+ * @param typeofelement String used to optimize the search, is a svg comment, in case there are multiple similar objects
+ * @return @c elementFound a double variable, the element found
+*/
+float Finder(string str, string start, string end, string typeofelement);
+
+
+/**
+ * Function that search variables from an svg file and store them
+ * This function uses Finder() function
+ * @param str String passed, the svg file
+ * @return @c readedshaft a struct of a new shaft where the parameters are the one readed from str
+*/
+Pol_shaft * shaft_from_svg(string str);
+
+
+/**
+ * Function that search variables from an svg file and store them
+ * This function uses Finder() function
+ * @param str String passed, the svg file
+ * @return @c readedshaft a struct of new squares where the parameters are the one readed from str
+*/
+Pol_squares * squares_from_svg(string str);
+
+
+/**
+ * Function that deallocate instances
 */
 void destroyer(Pol_shaft * myshaft, Pol_squares * mysquares);
 
