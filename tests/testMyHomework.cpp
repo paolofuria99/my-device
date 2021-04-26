@@ -31,3 +31,12 @@ TEST_CASE("Trying correct dimensions", "[my_set constrains]") {
     REQUIRE(my_set(400,20,105,20,20)==0);
 }
 
+
+TEST_CASE("Try to open a file", "[read_svg]") {
+    /**
+     * If the file doesn't exist the function have to return "no"
+    */
+    string svgfilename= "pincopallino.svg";
+    REQUIRE(read_svg (svgfilename)=="no");
+}
+

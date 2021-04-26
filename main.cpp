@@ -11,7 +11,7 @@
 using namespace std;
 
 int main() {
-    
+
     //Objects that are checked. 
     Pol_shaft* myshaft = new Pol_shaft;
     Pol_squares* mysquares= new Pol_squares;
@@ -23,7 +23,7 @@ int main() {
 
 
     //Default parameters
-    float ShaftLength=200 ;
+    float ShaftLength=300 ;
     float SquareSide1=20 ;
     float SquarePos1=80 ;
     float SquareSide2=50 ;
@@ -63,11 +63,11 @@ int main() {
         {
             case 1:
                 //Parameters are sets to default
-                ShaftLength=200 ;
-                SquareSide1=20 ;
-                SquarePos1=80 ;
-                SquareSide2=50 ;
-                SquarePos2=50;
+                ShaftLength=300 ; cout<<"Default shaft length is: "<<ShaftLength<<endl;
+                SquareSide1=20 ; cout<<"Default Side of Square 1 is: "<<SquareSide1<<endl;
+                SquarePos1=80 ; cout<<"Default Position of Square 1 is: "<<SquarePos1<<endl;
+                SquareSide2=50 ; cout<<"Default Side of Square 2 is: "<<SquareSide2<<endl;
+                SquarePos2=50; cout<<"Default Position of Square2 is: "<<SquarePos2<<endl;
 
                 //Checking dimensions
                 fine=my_set(ShaftLength, SquareSide1, SquarePos1, SquareSide2, SquarePos2);
@@ -147,7 +147,7 @@ int main() {
 
 
     //Prints the svg string to a file called as specified in the variable svgfilename
-    cout<<"\nThe new svg string with the parameters selected is created and is now saved into a file\n"<<endl;
+    cout<<"\nThe new svg string with the parameters selected is created and is now saved into a file in ../bin\n"<<endl;
     svg_to_file(svgfilename,svg_created);
     
     

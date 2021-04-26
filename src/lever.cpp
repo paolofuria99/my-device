@@ -61,8 +61,9 @@ Pol_squares* squares_init(float side1, float pos1, float side2, float pos2){
 string to_svg(Pol_shaft* myshaft, Pol_squares * mysquares){
 
     string svg;
-    float xline1= 250 - myshaft->s_length;
-    float xline2= 250 + myshaft->s_length;
+    //250 is the position of the vertex of the triangle
+    float xline1= 250 - (myshaft->s_length)/2;
+    float xline2= 250 + (myshaft->s_length)/2;
     float position1x= 250 - (mysquares->sq1_pos + (mysquares->sq1_pos)/2);
     float position2x= 250 + (mysquares->sq2_pos - (mysquares->sq2_pos)/2);
     float position1y= 250 - mysquares->sq1_side;
@@ -105,7 +106,7 @@ string read_svg (string filename){
         // Create a text string, which is used to output the text file
         myText = buffer.str();
     }else{
-        cout << "Unable to open file, maybe the file's name is wrong!"<<endl;
+        cout << "\n Unable to open file, maybe the file's name is wrong!"<<endl;
         return "no";
     }
     MyReadFile.close();
@@ -129,9 +130,11 @@ float Finder(string str, string start, string end, string typeofelement){
       elementFound=stof(element); //Convert a string into a float
     }else{
         cout<<"not found!"<<endl;
+        return -1;
     }
   }else{
     cout<<"Comment of the device name not found!"<<endl;
+    return -1;
   }
  
 
@@ -142,9 +145,15 @@ float Finder(string str, string start, string end, string typeofelement){
 Pol_shaft * shaft_from_svg(string str){
     // Allocating a struct called "newshaft" like "Pol_shaft"
     Pol_shaft* newshaftreaded = new Pol_shaft;
-    newshaftreaded->s_length= Finder(str, "x2='", "'", "Shaft") - Finder(str, "x1='", "'", "Shaft");
-    cout<< "DEBUG: Shaft length calculated from the file read is: "<<newshaftreaded->s_length<<"\n"<<endl;
+    float checking1,checking2;
 
+    checking1=Finder(str, "x2='", "'", "Shaft");
+    checking2=Finder(str, "x1='", "'", "Shaft");
+
+    if (checking1!=-1 && checking2!=-1){
+        newshaftreaded->s_length= checking1 - checking2;
+        cout<< "DEBUG: Shaft length calculated from the file read is: "<<newshaftreaded->s_length<<"\n"<<endl;
+    }
     return newshaftreaded;
 }
 
@@ -152,19 +161,31 @@ Pol_shaft * shaft_from_svg(string str){
 Pol_squares * squares_from_svg(string str){
     // Allocating a struct called "newsquares" like "Pol_shaft"
     Pol_squares* newsquaresreaded = new Pol_squares;
+    float checking;
 
-    newsquaresreaded->sq1_pos = (250-Finder(str, "x='",  "'", "Square1"))/(1.5);
-    cout<<"DEBUG: sq1 pos calculated from the file read: "<<newsquaresreaded->sq1_pos <<"\n"<<endl;
-
-    newsquaresreaded->sq1_side = Finder(str, "width='",  "'", "Square1");
+    checking=Finder(str, "x='",  "'", "Square1");
+    if(checking!=-1){
+        newsquaresreaded->sq1_pos = (250-checking)/(1.5);
+        cout<<"DEBUG: sq1 pos calculated from the file read: "<<newsquaresreaded->sq1_pos <<"\n"<<endl;
+    }
+    
+    checking=Finder(str, "width='",  "'", "Square1");
+    if(checking!=-1){
+        newsquaresreaded->sq1_side = checking;
     cout<<"DEBUG: sq1 side calculated from the file read: "<<newsquaresreaded->sq1_side <<"\n"<<endl;
+    }
     
-    newsquaresreaded->sq2_pos = (Finder(str, "x='",  "'", "Square2")-250)*2;
-    cout<<"DEBUG: sq2 pos calculated from the file read: "<<newsquaresreaded->sq2_pos <<"\n"<<endl;
+    checking=Finder(str, "x='",  "'", "Square2");
+    if(checking!=-1){
+        newsquaresreaded->sq2_pos = (checking-250)*2;
+        cout<<"DEBUG: sq2 pos calculated from the file read: "<<newsquaresreaded->sq2_pos <<"\n"<<endl;
+    }
 
-    newsquaresreaded->sq2_side = Finder(str, "width='",  "'", "Square2");
-    cout<<"DEBUG: sq2 side calculated from the file read: "<<newsquaresreaded->sq2_side <<endl;
-    
+    checking=Finder(str, "width='",  "'", "Square2");
+    if(checking!=-1){    
+        newsquaresreaded->sq2_side = checking;
+        cout<<"DEBUG: sq2 side calculated from the file read: "<<newsquaresreaded->sq2_side <<endl;
+    }
 
     return newsquaresreaded;
 
