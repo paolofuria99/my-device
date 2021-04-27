@@ -129,17 +129,19 @@ string to_svg(Pol_shaft* myshaft, Pol_squares * mysquares){
         svg+= "<polygon points='200,300 250,250 300,300' style='fill:lime;stroke:purple;stroke-width:1' />\n";  
         svg+= "<!-- Shaft -->\n";
         svg+= "<line x1='"+ to_string(xline1) + "'" + " y1='250' x2='" + to_string(xline2)+ "' y2='250' style='stroke:rgb(255,0,0);stroke-width:2' />\n";
+        svg+= "<line x1= '"+ to_string(xline1) +"' y1='260' x2='" + to_string(xline2)+ "' y2='260'  stroke='black' stroke-width='1'/>\n";
+        svg+= "<text x='"+ to_string(xline1) +"' y='280' fill='black'>"+ to_string(myshaft->s_length) +"</text>\n";
         svg+= "<!-- Square1 -->\n";
         svg+= "<rect x='"+ to_string(position1x) +"' y='"+ to_string(position1y) +"' width='"+ to_string(mysquares->sq1_side) +"' height='"+ to_string(mysquares->sq1_side) +"' style='fill:blue;stroke:black;stroke-width:1' />\n";
-        svg+= "<line x1 = '"+ to_string(position1x) +"' y1 = '"+ to_string(position1y -10) +"' x2 = '250' y2 = '"+ to_string(position1y -10) +"'  stroke = 'black' stroke-width  = '1'/>\n";
+        svg+= "<line x1= '"+ to_string(position1x) +"' y1= '"+ to_string(position1y -10) +"' x2= '250' y2 = '"+ to_string(position1y -10) +"'  stroke='black' stroke-width= '1'/>\n";
         svg+= "<text x='"+ to_string(position1x) +"' y='"+ to_string(position1y -12) +"' fill='black'>"+ to_string(mysquares->sq1_pos ) +"</text>\n";
-        svg+= "<line x1 = '"+ to_string(position1x-10) +"' y1 = '"+ to_string(position1y) +"' x2 = '"+ to_string(position1x-10) +"' y2 = '"+ to_string(position1y + mysquares->sq1_side) +"'  stroke = 'black' stroke-width  = '1'/>\n";
+        svg+= "<line x1 = '"+ to_string(position1x-10) +"' y1= '"+ to_string(position1y) +"' x2= '"+ to_string(position1x-10) +"' y2= '"+ to_string(position1y + mysquares->sq1_side) +"'  stroke='black' stroke-width='1'/>\n";
         svg+= "<text x='"+ to_string(position1x-13) +"' y='"+ to_string(position1y + mysquares->sq1_side/2) +"' transform='rotate(-90 "+ to_string(position1x-13) + ","+ to_string(position1y + mysquares->sq1_side/2) +")' fill='black'>"+ to_string(mysquares->sq1_side) +"</text>\n";
         svg+= "<!-- Square2 -->\n";
         svg+= "<rect x='"+ to_string(position2x) +"' y='"+ to_string(position2y) +"' width='"+ to_string(mysquares->sq2_side) +"' height='"+ to_string(mysquares->sq2_side) +"' style='fill:blue;stroke:black;stroke-width:1' />\n";
-        svg+= "<line x1 = '"+ to_string(position2x) +"' y1 = '"+ to_string(position2y -10) +"' x2 = '250' y2 = '"+ to_string(position2y -10) +"'  stroke = 'black' stroke-width  = '1'/>\n";
+        svg+= "<line x1= '"+ to_string(position2x) +"' y1= '"+ to_string(position2y -10) +"' x2= '250' y2 = '"+ to_string(position2y -10) +"'  stroke= 'black' stroke-width= '1'/>\n";
         svg+= "<text x='"+ to_string(250) +"' y='"+ to_string(position2y -12) +"' fill='black'>"+ to_string(mysquares->sq2_pos ) +"</text>\n";
-        svg+= "<line x1 = '"+ to_string(position2x + mysquares->sq2_side+10) +"' y1 = '"+ to_string(position2y) +"' x2 = '"+ to_string(position2x + mysquares->sq2_side+10) +"' y2 = '"+ to_string(position2y + mysquares->sq2_side) +"'  stroke = 'black' stroke-width  = '1'/>\n";
+        svg+= "<line x1= '"+ to_string(position2x + mysquares->sq2_side+10) +"' y1= '"+ to_string(position2y) +"' x2= '"+ to_string(position2x + mysquares->sq2_side+10) +"' y2= '"+ to_string(position2y + mysquares->sq2_side) +"'  stroke= 'black' stroke-width= '1'/>\n";
         svg+= "<text x='"+ to_string(position2x + mysquares->sq2_side+13) +"' y='"+ to_string(position2y) +"' transform='rotate(90 "+ to_string(position2x + mysquares->sq2_side+13) +","+ to_string(position2y) +")'  fill='black'>"+ to_string(mysquares->sq2_side) +"</text>\n";
         svg+= "</svg> \n";
         
@@ -227,9 +229,18 @@ Pol_squares * my_parse_squares(string str){
     Pol_squares* newsquaresreaded = new Pol_squares;
     float checking;
 
+    //250 is the position of the vertex of the triangle
+    // float xline1= 250 - (myshaft->s_length)/2;
+    // float xline2= 250 + (myshaft->s_length)/2;
+    // float position1x= 250 - (mysquares->sq1_pos );
+    // float position2x= 250 + (mysquares->sq2_pos);
+    // float position1y= 250 - mysquares->sq1_side;
+    // float position2y= 250 - mysquares->sq2_side;
+    // bool store_choice=with_measures();
+
     checking=Finder(str, "x='",  "'", "Square1");
     if(checking!=-1){
-        newsquaresreaded->sq1_pos = (250-checking)/(1.5);
+        newsquaresreaded->sq1_pos = (250-checking);
         cout<<"DEBUG: sq1 pos calculated from the file read: "<<newsquaresreaded->sq1_pos <<"\n"<<endl;
     }
     
@@ -241,7 +252,7 @@ Pol_squares * my_parse_squares(string str){
     
     checking=Finder(str, "x='",  "'", "Square2");
     if(checking!=-1){
-        newsquaresreaded->sq2_pos = (checking-250)*2;
+        newsquaresreaded->sq2_pos = (checking-250);
         cout<<"DEBUG: sq2 pos calculated from the file read: "<<newsquaresreaded->sq2_pos <<"\n"<<endl;
     }
 
