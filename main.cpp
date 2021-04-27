@@ -121,8 +121,8 @@ int main() {
                     cout<<svg_readed<<endl;
                     
                     //New objects, NOT checked, that are created from the file readed
-                    tryshaft= shaft_from_svg(svg_readed);
-                    trysquares= squares_from_svg(svg_readed);
+                    tryshaft= my_parse_shaft(svg_readed);
+                    trysquares= my_parse_squares(svg_readed);
 
                     //Check of variables readed
                     fine=my_set(tryshaft->s_length, trysquares->sq1_side, trysquares->sq1_pos, trysquares->sq2_side, trysquares->sq2_pos);
@@ -146,7 +146,8 @@ int main() {
       
     }while(fine==1);
 
-    //Is now created a string for a svg file with the dimesions that are given
+
+    //Is now created a string for a svg file with the dimesions that are given    
     svg_created = to_svg(myshaft, mysquares);
     cout << "\n The new svg code created is:" << endl;
     cout << svg_created;

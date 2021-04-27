@@ -63,28 +63,87 @@ Pol_squares* squares_init(float side1, float pos1, float side2, float pos2){
 }
 
 
+bool with_measures(){
+    char choice;
+    int forbool;
+    int end=1;
+    do{
+        cout<<"Do you want to include in the measures in the svg file? y/n: ";
+        cin>>choice;
+        switch (choice)
+        {
+        case 'y':
+            end=2;
+            forbool=1;
+            break;
+
+        case 'n':
+            end=2;
+            forbool=0;
+            break;
+        
+        default:
+            cout<< "Wrong choice. Try again"<<endl;
+            end=1;
+            break;
+        }
+        
+        
+    }while(end==1);
+    
+    return forbool;
+}
+
+
 string to_svg(Pol_shaft* myshaft, Pol_squares * mysquares){
 
     string svg;
     //250 is the position of the vertex of the triangle
     float xline1= 250 - (myshaft->s_length)/2;
     float xline2= 250 + (myshaft->s_length)/2;
-    float position1x= 250 - (mysquares->sq1_pos + (mysquares->sq1_pos)/2);
-    float position2x= 250 + (mysquares->sq2_pos - (mysquares->sq2_pos)/2);
+    float position1x= 250 - (mysquares->sq1_pos );
+    float position2x= 250 + (mysquares->sq2_pos);
     float position1y= 250 - mysquares->sq1_side;
     float position2y= 250 - mysquares->sq2_side;
-
-    svg= "<?xml version='1.0' encoding='UTF-8' standalone='no'?> \n";
-    svg+= "<svg xmlns='http://www.w3.org/2000/svg' height='300' width='500'> \n" ;
-    svg+= "<polygon points='200,300 250,250 300,300' style='fill:lime;stroke:purple;stroke-width:1' />\n";  
-    svg+= "<!-- Shaft -->\n";
-    svg+= "<line x1='"+ to_string(xline1) + "'" + " y1='250' x2='" + to_string(xline2)+ "' y2='250' style='stroke:rgb(255,0,0);stroke-width:2' />\n";
-    svg+= "<!-- Square1 -->\n";
-    svg+= "<rect x='"+ to_string(position1x) +"' y='"+ to_string(position1y) +"' width='"+ to_string(mysquares->sq1_side) +"' height='"+ to_string(mysquares->sq1_side) +"' style='fill:blue;stroke:black;stroke-width:1' />\n";
-    svg+= "<!-- Square2 -->\n";
-    svg+= "<rect x='"+ to_string(position2x) +"' y='"+ to_string(position2y) +"' width='"+ to_string(mysquares->sq2_side) +"' height='"+ to_string(mysquares->sq2_side) +"' style='fill:blue;stroke:black;stroke-width:1' />\n";
-    svg+= "</svg> \n";
+    bool store_choice=with_measures();
     
+    
+
+    if (store_choice==0){
+        svg= "<?xml version='1.0' encoding='UTF-8' standalone='no'?> \n";
+        svg+= "<svg xmlns='http://www.w3.org/2000/svg' height='300' width='500'> \n" ;
+        svg+= "<polygon points='200,300 250,250 300,300' style='fill:lime;stroke:purple;stroke-width:1' />\n";  
+        svg+= "<!-- Shaft -->\n";
+        svg+= "<line x1='"+ to_string(xline1) + "'" + " y1='250' x2='" + to_string(xline2)+ "' y2='250' style='stroke:rgb(255,0,0);stroke-width:2' />\n";
+        svg+= "<!-- Square1 -->\n";
+        svg+= "<rect x='"+ to_string(position1x) +"' y='"+ to_string(position1y) +"' width='"+ to_string(mysquares->sq1_side) +"' height='"+ to_string(mysquares->sq1_side) +"' style='fill:blue;stroke:black;stroke-width:1' />\n";
+        svg+= "<!-- Square2 -->\n";
+        svg+= "<rect x='"+ to_string(position2x) +"' y='"+ to_string(position2y) +"' width='"+ to_string(mysquares->sq2_side) +"' height='"+ to_string(mysquares->sq2_side) +"' style='fill:blue;stroke:black;stroke-width:1' />\n";
+        svg+= "</svg> \n";
+        
+    }
+
+    if(store_choice==1){
+        svg= "<?xml version='1.0' encoding='UTF-8' standalone='no'?> \n";
+        svg+= "<svg xmlns='http://www.w3.org/2000/svg' height='300' width='500'> \n" ;
+        svg+= "<polygon points='200,300 250,250 300,300' style='fill:lime;stroke:purple;stroke-width:1' />\n";  
+        svg+= "<!-- Shaft -->\n";
+        svg+= "<line x1='"+ to_string(xline1) + "'" + " y1='250' x2='" + to_string(xline2)+ "' y2='250' style='stroke:rgb(255,0,0);stroke-width:2' />\n";
+        svg+= "<!-- Square1 -->\n";
+        svg+= "<rect x='"+ to_string(position1x) +"' y='"+ to_string(position1y) +"' width='"+ to_string(mysquares->sq1_side) +"' height='"+ to_string(mysquares->sq1_side) +"' style='fill:blue;stroke:black;stroke-width:1' />\n";
+        svg+= "<line x1 = '"+ to_string(position1x) +"' y1 = '"+ to_string(position1y -10) +"' x2 = '250' y2 = '"+ to_string(position1y -10) +"'  stroke = 'black' stroke-width  = '1'/>\n";
+        svg+= "<text x='"+ to_string(position1x) +"' y='"+ to_string(position1y -12) +"' fill='black'>"+ to_string(mysquares->sq1_pos ) +"</text>\n";
+        svg+= "<line x1 = '"+ to_string(position1x-10) +"' y1 = '"+ to_string(position1y) +"' x2 = '"+ to_string(position1x-10) +"' y2 = '"+ to_string(position1y + mysquares->sq1_side) +"'  stroke = 'black' stroke-width  = '1'/>\n";
+        svg+= "<text x='"+ to_string(position1x-13) +"' y='"+ to_string(position1y + mysquares->sq1_side/2) +"' transform='rotate(-90 "+ to_string(position1x-13) + ","+ to_string(position1y + mysquares->sq1_side/2) +")' fill='black'>"+ to_string(mysquares->sq1_side) +"</text>\n";
+        svg+= "<!-- Square2 -->\n";
+        svg+= "<rect x='"+ to_string(position2x) +"' y='"+ to_string(position2y) +"' width='"+ to_string(mysquares->sq2_side) +"' height='"+ to_string(mysquares->sq2_side) +"' style='fill:blue;stroke:black;stroke-width:1' />\n";
+        svg+= "<line x1 = '"+ to_string(position2x) +"' y1 = '"+ to_string(position2y -10) +"' x2 = '250' y2 = '"+ to_string(position2y -10) +"'  stroke = 'black' stroke-width  = '1'/>\n";
+        svg+= "<text x='"+ to_string(250) +"' y='"+ to_string(position2y -12) +"' fill='black'>"+ to_string(mysquares->sq2_pos ) +"</text>\n";
+        svg+= "<line x1 = '"+ to_string(position2x + mysquares->sq2_side+10) +"' y1 = '"+ to_string(position2y) +"' x2 = '"+ to_string(position2x + mysquares->sq2_side+10) +"' y2 = '"+ to_string(position2y + mysquares->sq2_side) +"'  stroke = 'black' stroke-width  = '1'/>\n";
+        svg+= "<text x='"+ to_string(position2x + mysquares->sq2_side+13) +"' y='"+ to_string(position2y) +"' transform='rotate(90 "+ to_string(position2x + mysquares->sq2_side+13) +","+ to_string(position2y) +")'  fill='black'>"+ to_string(mysquares->sq2_side) +"</text>\n";
+        svg+= "</svg> \n";
+        
+    }
     return svg;
 }
 
@@ -147,7 +206,7 @@ float Finder(string str, string start, string end, string typeofelement){
 }
 
 
-Pol_shaft * shaft_from_svg(string str){
+Pol_shaft * my_parse_shaft(string str){
     // Allocating a struct called "newshaft" like "Pol_shaft"
     Pol_shaft* newshaftreaded = new Pol_shaft;
     float checking1,checking2;
@@ -163,7 +222,7 @@ Pol_shaft * shaft_from_svg(string str){
 }
 
 
-Pol_squares * squares_from_svg(string str){
+Pol_squares * my_parse_squares(string str){
     // Allocating a struct called "newsquares" like "Pol_shaft"
     Pol_squares* newsquaresreaded = new Pol_squares;
     float checking;

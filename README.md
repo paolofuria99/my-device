@@ -76,10 +76,18 @@ Pol_shaft * shaft_init(float sLength);
 */
 Pol_squares * squares_init(float side1, float pos1, float side2, float pos2);
 ~~~
+**bool with_measures()**
+~~~ C++
+/** Function that is used to decide if adding measures to the svg file
+ * @return @c bool 1 if the user want an svg WITH measures,
+ * 0 if the user want an svg file WITHOUT measures
+*/
+bool with_measures();
+~~~ 
 
 **string to_svg()**
 ~~~ C++
-/** Function that create a string svg containing the image of the shaft and of the squares 
+/** Function that create a string svg containing the image of the shaft and of the squares
  * 
  *  @param myshaft stucture containg the data of the shaft
  *  @param mysquares stucture containg the data of the squares
@@ -133,7 +141,7 @@ string read_svg (string filename);
 float Finder(string str, string start, string end, string typeofelement);
 ~~~
 
-**Pol_shaft * shaft_from_svg()**
+**Pol_shaft * my_parse_shaft()**
 ~~~ C++
 /**
  * Function that search variables from an svg file and store them
@@ -141,10 +149,10 @@ float Finder(string str, string start, string end, string typeofelement);
  * @param str String passed, the svg file
  * @return @c newshaftreaded a struct of a new shaft where the parameters are the one readed from str
 */
-Pol_shaft * shaft_from_svg(string str);
+Pol_shaft * my_parse_shaft(string str);
 ~~~
 
-**Pol_squares * squares_from_svg()**
+**Pol_squares * my_parse_squares()**
 ~~~ C++
 /**
  * Function that search variables from an svg file and store them
@@ -152,7 +160,7 @@ Pol_shaft * shaft_from_svg(string str);
  * @param str String passed, the svg file
  * @return @c newsquaresreaded a struct of new squares where the parameters are the one readed from str
 */
-Pol_squares * squares_from_svg(string str);
+Pol_squares * my_parse_squares(string str);
 ~~~
 
 **void destroyer()**
