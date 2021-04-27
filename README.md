@@ -25,7 +25,7 @@ To run this program you have to download the zip file, run a terminal in the pat
 **With this program you can choose if:**
 1. Keep the default sizes. After cheking sizes, the program will create a svg file which will be saved in the ../bin folder. It will also print some Debug strings on the terminal  
 2. Change default sizes and create your own lever. The program will check if the sizes in input are correct and then will create an svg file that will be saved in the ../bin folder. It will also print some Debug strings on the terminal  
-3. Read sizes from an already existing file that have do be in ../bin folder and called "filename.svg". The program will search the sizes of the object and store them.
+3. Read sizes from an already existing file that have do be in ../bin folder. The program will search the sizes of the object and store them.
 
 ### Documentation of the device updated with version v2.0.0:
 
