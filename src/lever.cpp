@@ -9,6 +9,11 @@ int my_set(double ShaftLength, double SquareSide1, double SquarePos1, double Squ
         cout<<"\n Dimensions have to be different than 0!!!"<<endl;
         return 1;
     }
+
+    if (ShaftLength<0 || SquareSide1<0 || SquareSide2<0 || SquarePos1<0 || SquarePos2<0){
+        cout<<"\n Dimensions have to be POSITIVE (>0)!!!"<<endl;
+        return 1;
+    }
     
     if(ShaftLength>500){
         cout<<"\n Dimension of the shaft have to be SMALLER than 500!!!"<<endl;
