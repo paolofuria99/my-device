@@ -8,7 +8,8 @@ The device I want to create is a 2D Lever with two square objects.
 
 For now the dimensions and the position of the triangle that supports the shaft are already given (are fixed).
 
-![Lever](example.svg)
+![Lever](example2.svg)
+![Lever](example1.svg)
 
 
 **How to run**
