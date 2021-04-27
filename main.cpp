@@ -29,8 +29,11 @@ int main() {
     float SquareSide2=50 ;
     float SquarePos2=50;
 
-    //Name of the svg file that you want to create, is the same file that is read
-    string svgfilename= "filename.svg";
+    //Name of the svg file that you want to create
+    string svgfilename_to;
+
+    //Name of the file to get the data from
+    string svgfilename_from;
 
     //String that will contain the file svg readed
     string svg_readed;
@@ -46,7 +49,7 @@ int main() {
         cout<< "2 - Yes" <<endl;
         cout<< "3 - Read sizes from an already existing file and storing them" << endl;
         cout<< "9 - to quit/end the program"<<endl;
-        cout<< "Insert the option here: ";
+        cout<< "\n Insert the option here: ";
         
         /**I found online this formula that checks if the input is correct.. 
          * example, it will fail if the input is a letter or not an integer (float, double..)
@@ -105,7 +108,10 @@ int main() {
                 break;
 
             case 3:
-                svg_readed=read_svg (svgfilename);
+                cout<<"Tell me the name of the file to get the data from (without extension): ";
+                cin>>svgfilename_from;
+                svgfilename_from+=".svg";
+                svg_readed=read_svg (svgfilename_from);
                 if (svg_readed=="no"){
                     cout<<"something goes wrong"<<endl;
                     fine=1;
@@ -147,8 +153,11 @@ int main() {
 
 
     //Prints the svg string to a file called as specified in the variable svgfilename
+    cout<<"\n Name of the file to save the data to (without extension): ";
+    cin>>svgfilename_to;
+    svgfilename_to+=".svg";
     cout<<"\nThe new svg string with the parameters selected is created and is now saved into a file in ../bin\n"<<endl;
-    svg_to_file(svgfilename,svg_created);
+    svg_to_file(svgfilename_to,svg_created);
     
     
     //Destroy the objects
