@@ -9,7 +9,10 @@ add_executable(main main.cpp)
 
 target_include_directories(main PRIVATE include)
 
-target_sources(main PRIVATE src/lever.cpp)
+target_sources(main PRIVATE src/lever.cpp
+                            src/EB_Device.cpp
+                            src/myMachine.cpp
+                            )
 
 target_link_libraries(main)
 

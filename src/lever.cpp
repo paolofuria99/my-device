@@ -1,5 +1,6 @@
 #include "lever.h"
 
+
 using namespace std;
 
 
@@ -93,7 +94,6 @@ bool with_measures(){
     
     return forbool;
 }
-
 
 string to_svg(Pol_shaft* myshaft, Pol_squares * mysquares){
 

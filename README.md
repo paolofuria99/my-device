@@ -27,6 +27,12 @@ To run this program you have to download the zip file, run a terminal in the pat
 2. Change default sizes and create your own lever. The program will check if the sizes in input are correct and then will create an svg file that will be saved in the ../bin folder. It will also print some Debug strings on the terminal  
 3. Read sizes from an already existing file that have do be in ../bin folder. The program will search the sizes of the object and store them.
 
+## Machine
+The machine I want to create is A trolley crane with a lever
+![Machine](example3.svg)
+
+
+
 ### Documentation of the device updated with version v3.0.0:
 
 **struct Pol_shaft**
@@ -86,14 +92,14 @@ Pol_squares * squares_init(float side1, float pos1, float side2, float pos2);
 bool with_measures();
 ~~~ 
 
-**string to_svg()**
+**string to_svg_Machine()**
 ~~~ C++
 /** Function that create a string svg containing the image of the shaft and of the squares
  * 
  *  @param myshaft stucture containg the data of the shaft
  *  @param mysquares stucture containg the data of the squares
  */
-string to_svg(Pol_shaft* myshaft, Pol_squares * mysquares);
+string to_svg_Machine(Pol_shaft* myshaft, Pol_squares * mysquares);
 ~~~ 
 
 **int my_set()**
