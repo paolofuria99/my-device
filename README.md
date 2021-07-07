@@ -28,7 +28,7 @@ To run this program you have to download the zip file, run a terminal in the pat
 3. Read sizes from an already existing file that have do be in ../bin folder. The program will search the sizes of the object and store them.
 
 ## Machine
-The machine I want to create is A trolley crane with a lever
+The machine I want to create is a trolley crane (imported from @eliabonte https://github.com/eliabonte/Assignment1.git) with a lever.
 ![Machine](example3.svg)
 
 

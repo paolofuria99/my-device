@@ -83,14 +83,6 @@ int main() {
         cout<<"9 - To quit/end the program"<<endl;
         cout<<"\n Insert your option here: ";
 
-        /**I found online this formula that checks if the input is correct.. 
-         * example, it will fail if the input is a letter or not an integer (float, double..)
-        */
-        while(!(cin>> choice)){
-            cout<<"\n ERROR: an integer must be entered:";
-            cin.clear();
-            cin.ignore(132, '\n');
-        }
         cout<<endl;
         cout<<"DEBUG:" << choice << "\n" << endl;
         switch (choice)
@@ -101,18 +93,13 @@ int main() {
             break;
         case 2:
             int n;
-            // cout<<"How many machine do you want?: ";
-            // while(!(cin>> n)){
-            // cout<<"\n ERROR: an integer must be entered:";
-            // cin.clear();
-            // cin.ignore(132, '\n');
-            // }
+            
             n=1;
             Pol_Machine(n);
             fine=2;
             break;
         case 9:
-            fine=0;
+            fine=2;
             return EXIT_SUCCESS;
         default:
             cout<<"\n Please, enter a correct option!\n";
@@ -186,14 +173,7 @@ void Pol_Machine(int n){
         cout<< "9 - to quit/end the program"<<endl;
         cout<< "\n Insert the option here: ";
         
-        /**I found online this formula that checks if the input is correct.. 
-         * example, it will fail if the input is a letter or not an integer (float, double..)
-        */
-        while(!(cin>> c)){
-            cout<<"\n ERROR: an integer must be entered:";
-            cin.clear();
-            cin.ignore(132, '\n');
-        }
+        
         cout<<endl;
         cout<<"DEBUG:" << c << "\n" << endl;
         
@@ -201,6 +181,7 @@ void Pol_Machine(int n){
         {
             case 1:
                 //Parameters are sets to default
+                cout<<"Restoring default sizes"<<endl;
                 ShaftLength=300 ; cout<<"Default shaft length is: "<<ShaftLength<<endl;
                 SquareSide1=20 ; cout<<"Default Side of Square 1 is: "<<SquareSide1<<endl;
                 SquarePos1=80 ; cout<<"Default Position of Square 1 is: "<<SquarePos1<<endl;
@@ -285,36 +266,9 @@ void Pol_Machine(int n){
                 }
                 break;
 
-            // case 3:
-            //     cout<<"Tell me the name of the file to get the data from (without extension): ";
-            //     cin>>svgfilename_from;
-            //     svgfilename_from+=".svg";
-            //     svg_readed=read_svg (svgfilename_from);
-            //     if (svg_readed=="no"){
-            //         cout<<"something goes wrong"<<endl;
-            //         fine=1;
-            //         break;                    
-            //     }else{
-            //         cout<<"The svg file readed is:"<<endl;
-            //         cout<<svg_readed<<endl;
-                    
-            //         //New objects, NOT checked, that are created from the file readed
-            //         tryshaft= my_parse_shaft(svg_readed);
-            //         trysquares= my_parse_squares(svg_readed);
-
-            //         //Check of variables readed
-            //         fine=my_set(tryshaft->s_length, trysquares->sq1_side, trysquares->sq1_pos, trysquares->sq2_side, trysquares->sq2_pos);
-            //         if(fine==0){ 
-            //             cout<<"\n DEBUG: Dimensions checked.. Creating objects.."<<endl;           
-            //             //New objects, checked, that are created from the file readed
-            //             myshaft=tryshaft;
-            //             mysquares=trysquares;
-            //         }
-                    
-            //         break;
-            //     }
+            
             case 9:
-                fine=0;
+                fine=2;
                 return exit(1);
             default:
                 cout<<"\n Please, enter a correct option!\n";
@@ -326,7 +280,7 @@ void Pol_Machine(int n){
 
 
     //Is now created a string for a svg file with the dimesions that are given    
-    svg_created = to_svg_Machine(MyDevice,myshaft, mysquares);
+    svg_created = to_svg_Machine(MyDevice, myshaft, mysquares);
     cout << "\n The new svg code created is:" << endl;
     cout << svg_created;
 
@@ -356,14 +310,7 @@ void Pol_Device(){
         cout<< "9 - to quit/end the program"<<endl;
         cout<< "\n Insert the option here: ";
         
-        /**I found online this formula that checks if the input is correct.. 
-         * example, it will fail if the input is a letter or not an integer (float, double..)
-        */
-        while(!(cin>> c)){
-            cout<<"\n ERROR: an integer must be entered:";
-            cin.clear();
-            cin.ignore(132, '\n');
-        }
+        
         cout<<endl;
         cout<<"DEBUG:" << c << "\n" << endl;
         
